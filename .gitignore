@@ -1,3 +1,20 @@
+
+#只保留需要的文件目录
+# 1. 全局忽略所有文件和文件夹（包括子目录）
+*
+
+# 2. 排除（否定）需要保留的文件夹本身
+# 注意：你需要先排除文件夹本身，才能进一步排除它里面的内容
+!protobuf/
+
+# 3. 排除（否定）需要保留的文件夹里的所有内容
+# 这一行是关键，它允许 Git 追踪 important_data/ 里面的所有文件和子文件夹
+!protobuf/**
+
+# 4. 排除（否定）根目录下的文件
+# 注意：使用 / 开头确保只排除根目录下的文件
+!/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -205,3 +222,4 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
