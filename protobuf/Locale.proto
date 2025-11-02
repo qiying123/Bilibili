@@ -1,0 +1,20 @@
+// 文件名: Locale.proto
+syntax = "proto3";
+
+package com.bapis.bilibili.metadata.locale;
+
+// 导入我们刚刚定义的 LocaleIds 消息
+import "LocaleIds.proto";
+
+// 选项 java_outer_classname 是为了更好地匹配Java生成的结构，可选
+option java_outer_classname = "LocaleProto";
+
+message Locale {
+  LocaleIds c_locale = 1;         // 客户端（App内设置）的语言区域信息
+  LocaleIds s_locale = 2;         // 系统（手机系统设置）的语言区域信息
+  string sim_code = 3 [deprecated=true]; // SIM卡代码，已弃用
+  string timezone = 4;           // 时区ID，例如 "Asia/Shanghai"
+  string utc_offset = 5;         // UTC偏移字符串，例如 "+08:00"
+  bool is_daylight_time = 6;     // 是否为夏令时
+  bool always_translate = 7;     // 是否总开启翻译功能
+}

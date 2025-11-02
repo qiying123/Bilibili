@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+// 定义包名，与 Java 包名保持一致，便于管理
+package com.bilibili.lib.gtv.protocal;
+
+// 选项，让生成的 Java 代码使用与 .proto 文件相同的包结构
+option java_package = "com.bilibili.lib.gtv.protocal";
+option java_multiple_files = true; // 推荐，为每个 message/enum 生成单独的 .java 文件
+
+// TFType 枚举定义
+enum TFType {
+  TF_UNKNOWN = 0;
+  U_CARD = 1;
+  U_PKG = 2;
+  C_CARD = 3;
+  C_PKG = 4;
+  T_CARD = 5;
+  T_PKG = 6;
+}
+
+// NetworkType 枚举定义
+enum NetworkType {
+  NT_UNKNOWN = 0;
+  WIFI = 1;
+  CELLULAR = 2;
+  OFFLINE = 3;
+  OTHERNET = 4;
+  ETHERNET = 5;
+}
+
+// CellularType 枚举定义
+enum CellularType {
+  C_NONE = 0;
+  C_2G = 1;
+  C_3G = 2;
+  C_4G = 3;
+  C_5G = 4;
+}

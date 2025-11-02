@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package bilibili.api.ticket.v1;
+
+// 请求体定义
+message GetTicketRequest {
+  map<string, bytes> context = 1;
+  string key_id = 2;
+  bytes sign = 3;
+}
+
+// 响应体定义
+message GetTicketResponse {
+  string ticket = 1;
+}
+
+// gRPC服务定义
+service Ticket {
+  rpc GetTicket (GetTicketRequest) returns (GetTicketResponse);
+}

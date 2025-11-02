@@ -1,0 +1,13 @@
+// 文件名: LocaleIds.proto
+syntax = "proto3";
+
+package com.bapis.bilibili.metadata.locale;
+
+// 选项 java_outer_classname 是为了更好地匹配Java生成的结构，可选
+option java_outer_classname = "LocaleIdsProto";
+
+message LocaleIds {
+  string language = 1; // 语言，例如 "zh"
+  string script = 2;   // 文字体系，例如 "Hans" (简体), "Hant" (繁体)
+  string region = 3;   // 区域，例如 "CN" (中国), "US" (美国)
+}

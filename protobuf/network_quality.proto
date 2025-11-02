@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+// 导入我们刚才定义的枚举文件
+import "types.proto";
+
+package com.bilibili.lib.gtv.protocal;
+
+option java_package = "com.bilibili.lib.gtv.protocal";
+option java_multiple_files = true;
+
+// NetQuality 消息定义
+message NetQuality {
+  float success_rate = 1;
+  int32 speed = 2;
+  int64 speed_timestamp = 3;
+  NetworkType net_type = 4; // 注意：这里类型是 NetworkType 枚举，而不是 int32
+}
+
+// Network 消息定义
+message Network {
+  NetworkType type = 1;
+  TFType tf = 2;
+  string oid = 3;
+  CellularType cellular = 4;
+  NetQuality quality = 5;
+}
