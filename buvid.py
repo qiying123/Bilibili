@@ -37,7 +37,7 @@ def generate_android_id() -> str:
     """生成一个随机的Android ID (16位十六进制字符串)。"""
     return os.urandom(8).hex()
 
-def generate_drm_id() -> str:
+def generate_drm_id() ->  str:
     """生成一个随机的DRM ID (32位十六进制字符串)。"""
     return os.urandom(16).hex()
 
