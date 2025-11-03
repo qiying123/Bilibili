@@ -417,14 +417,14 @@ def get_fingerprint_data(get_ticket: bool = True):
         },
     }
 
-    # 如果需要，则调用 gRPC 接口获取真实的 x-bili-ticket 并更新字典
+    # 检查 JWT 是否已过期 (超过24小时)，如果需要，则调用 gRPC 接口获取真实的 x-bili-ticket 并更新字典
+
     if get_ticket:
         cached_ticket_info = _get_cached_ticket()
         current_time = time.time()
 
         # 检查缓存是否存在且未过期
         if cached_ticket_info and (current_time - cached_ticket_info.get("last_updated", 0)) < TICKET_EXPIRATION_SECONDS:
-            print("[FingerprintDB] 使用缓存的有效 JWT。")
             ticket = cached_ticket_info["ticket"]
             FINGERPRINT_DATA["x-bili-ticket"] = ticket
         else:

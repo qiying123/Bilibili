@@ -195,7 +195,7 @@ def simulate_watch(bvid: str, watch_duration: int = 65, video_duration: int = 12
     reporter.report_start(video_duration=video_duration)
     # 实际的观看等待可以省略，因为心跳上报不依赖于此处的延时
     reporter.report_end(played_time=watch_duration, video_duration=video_duration)
-    print("\n[+] 模拟观看流程完成。")
+
 
 
 def _get_new_did(aid: str, cid: str):
@@ -277,10 +277,10 @@ def _get_new_did(aid: str, cid: str):
                 return new_did
             else:
                 print(f"[DID Updater] 获取新 DID 失败: 响应内容不符合预期。响应: {response.text}")
-                return None
+                exit(1)
         else:
             print(f"[DID Updater] 获取新 DID 失败: 状态码 {response.status_code}")
-            return None
+            exit(1)
     except requests.RequestException as e:
         print(f"[DID Updater] 获取新 DID 时发生网络错误: {e}")
         return None
@@ -380,8 +380,10 @@ def click(bvid):
     try:
         response = requests.post(url, data=data, headers=headers)
         response.raise_for_status()
-        print("响应内容:", response.text)
-        return response
+        if response.json().get("code") == 0:
+            return response
+        else:
+            print(f"点击上报失败: click接口响应内容 {response.json()}")
     except requests.RequestException as e:
         print(f"请求发生错误: {e}")
         return None
@@ -409,8 +411,8 @@ def sign_aes(data_string: str) -> str:
 
 
 if __name__ == '__main__':
-    bvid = ""
-    watch_duration = video_duration = 0
+    bvid = "" #这里输入BV号
+    watch_duration = video_duration = 0 # 这里输入观看时长
 
     if not bvid:
         bvid = input("请输入BVID: ")
